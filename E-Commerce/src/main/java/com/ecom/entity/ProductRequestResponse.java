@@ -27,8 +27,6 @@ public class ProductRequestResponse {
     private String message;
     private Product product;
 
-
-
     public String getProdName() {
         return prodName;
     }
