@@ -91,14 +91,14 @@ public class ProductServiceImpl implements ProductService {
             existingProduct.setProdDescription(request.getProdDescription());
             existingProduct.setStock(request.getStock());
             existingProduct.setPrice(request.getPrice());
-            List<ProductImages> images = new ArrayList<>();
-            for(int i=0;i<request.getImages().size();i++){
-                ProductImages image = request.getImages().get(i);
-                image.setProduct(existingProduct);
-                images.add(image);
-            }
+//            List<ProductImages> images = new ArrayList<>();
+//            for(int i=0;i<request.getImages().size();i++){
+//                ProductImages image = request.getImages().get(i);
+//                image.setProduct(existingProduct);
+//                images.add(image);
+//            }
 
-            existingProduct.setImages(images);
+            //existingProduct.setImages(images);
 
             Product prod = productRepository.save(existingProduct);
             if(prod.getProdId()>0){
