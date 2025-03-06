@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -107,6 +106,30 @@ public class ProductServiceImpl implements ProductService {
             else{
                 response.setMessage("Product not saved");
             }
+        }
+        return response;
+    }
+
+    @Override
+    public ProductRequestResponse addImages(ProductRequestResponse request, Long prodId) {
+        ProductRequestResponse response = new ProductRequestResponse();
+        Product product = productRepository.findByProdId(prodId);
+        System.out.println("product "+product);
+        List<ProductImages> prodImages = product.getImages();
+        for(int i=0;i<request.getImages().size();i++){
+            ProductImages image = request.getImages().get(i);
+            image.setImageUrl(image.getImageUrl());
+            image.setProduct(product);
+            prodImages.add(image);
+        }
+        product.setImages(prodImages);
+        Product prod = productRepository.save(product);
+        List<String> images = prod.getImages().stream()
+                .map(ProductImages::getImageUrl)
+                .toList();
+        if(prod.getProdId()>0){
+            response.setMessage("Images added successfully");
+            response.setProdImages(images);
         }
         return response;
     }

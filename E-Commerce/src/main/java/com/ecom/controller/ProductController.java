@@ -37,4 +37,9 @@ public class ProductController {
     public ResponseEntity<ProductRequestResponse> updateProduct(@RequestParam Long prodId,@RequestBody ProductRequestResponse request){
         return ResponseEntity.ok(productService.updateProduct(prodId,request));
     }
+
+    @PostMapping("/add-only-images")
+    public ResponseEntity<ProductRequestResponse> addImages(@RequestParam Long prodId,@RequestBody ProductRequestResponse request){
+        return ResponseEntity.ok(productService.addImages(request,prodId));
+    }
 }
